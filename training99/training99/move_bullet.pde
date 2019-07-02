@@ -1,5 +1,6 @@
 void move_bullet()
 {
+  fill(255, 255, 0) ;
   for(node v : bullet_array)
   {
     v.move() ;

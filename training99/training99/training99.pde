@@ -3,68 +3,66 @@ ArrayList<node> bullet_array = new ArrayList<node>() ;
 final int bullet_size = 5 ;
 final int max_bullet_amount = 70 ;
 final int movedist = 1 ;
-boolean u, d, l, r;
+float init_time = 0 ;
+boolean press_up, press_down, press_left, press_right;
+boolean END = true ;
 void setup()
 {
   frameRate(90) ;
   size(400, 300) ;
   background(0) ;
   px = width/2 ;
-  py = height/2 ;
+  py = height*3/4 ;
+
 }
-
-
 void draw()
 {
   background(0) ;
-  fill(255, 255, 0) ;
   generate_bullet() ;
   move_bullet() ;
-  fill(255) ;
-  ellipse(px, py, 10, 10) ;
-  if ( u )
-    py -= movedist ;
-  if ( d )
-    py += movedist ;
-  if ( l )
-    px -= movedist ;
-  if ( r )
-    px += movedist ;
+  move() ;
 
   if ( !alive() )
   {
-    stop() ;
+    //stop() ;
+    noLoop() ;
     textSize(40);
     fill(100, 150, 200);
-    float score = millis() ;
-    text("You Die\nScore : "+score/1000, 50, 50) ;
+    String score = nf( (millis()-init_time)/1000, 0, 3) ;
+    text("You Die\nScore : "+score, 50, 50) ;
+    END = true ;
   }
 }
-
 void keyPressed()
 {
+  if( END == true && key == ENTER )
+  {
+    END = false ;
+    init() ;
+    loop() ;
+  }
   if ( key == CODED )
   {
     if ( keyCode == UP )
-      u=true;
+      press_up = true;
     else if ( keyCode == DOWN )
-      d=true;
+      press_down = true;
     else if ( keyCode == LEFT )
-      l=true;
+      press_left = true;
     else if ( keyCode == RIGHT )
-      r=true ;
+      press_right = true;
   }
 }
 void keyReleased() {
   if ( key == CODED )
   {
     if ( keyCode == UP )
-      u=false;
+      press_up = false;
     else if ( keyCode == DOWN )
-      d=false;
+      press_down = false;
     else if ( keyCode == LEFT )
-      l=false;
+      press_left = false;
     else if ( keyCode == RIGHT )
-      r=false;
+      press_right = false;
   }
 }
