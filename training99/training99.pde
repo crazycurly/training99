@@ -22,7 +22,6 @@ void draw()
   move_bullet() ;
   fill(255) ;
   ellipse(px, py, 10, 10) ;
-
   if ( u )
     py -= movedist ;
   if ( d )
