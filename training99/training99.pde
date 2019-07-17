@@ -24,7 +24,6 @@ void draw()
 
   if ( !alive() )
   {
-    //stop() ;
     noLoop() ;
     textSize(40);
     fill(100, 150, 200);
